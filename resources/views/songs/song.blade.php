@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Never Gonna Give You Up</title>
+    <title>{{$song->song_title}}</title>
     <link
       rel="shortcut icon"
       href="https://png.pngtree.com/png-vector/20221213/ourmid/pngtree-old-cd-vector-design-png-image_6521891.png"
@@ -62,17 +62,17 @@
         <div class="ms-auto">
           <ul class="navbar-nav me-5 mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="./index.html"
+              <a class="nav-link active" aria-current="page" href=" {{ url('/song')}}"
                 >Discover</a
               >
             </li>
           </ul>
         </div>
-        <a class="navbar-brand" href="./index.html">SoundShare</a>
+        <a class="navbar-brand" href="{{url('/song')}}">SoundShare</a>
         <div class="me-auto">
           <ul class="navbar-nav ms-5 mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="./share.html">Share</a>
+              <a class="nav-link" href="{{ url('/song/take/create') }}">Share</a>
             </li>
           </ul>
         </div>
@@ -82,7 +82,7 @@
     <div class="container">
       <div class="row mt-5">
         <div class="col-md-8 mx-auto">
-          <h1 class="text-center">Never Gonna Give You Up</h1>
+          <h1 class="text-center">{{$song->song_title}}</h1>
           <h3 class="text-center pt-3">{{ $song->artist }}</h3>
           <div class="d-flex justify-content-center align-items-center py-5">
             <a
@@ -90,10 +90,17 @@
               class="text-reset text-none"
               target="_blank"
             >
+            @if($song->platform == 'youtube')
               <div class="watch watch-youtube">
                 <i class="fa-brands fa-youtube"></i>
-                <span class="ms-2">Watch now on Youtube</span>
+                <span class="ms-2">Watch now on {{$song->platform}}</span>
               </div>
+            @else 
+            <div class="watch watch-spotify">
+                <i class="fa-brands fa-spotify"></i>
+                <span class="ms-2">Watch now on {{$song->platform}}</span>
+              </div>
+              @endif
             </a>
             <!-- <a
               href="https://open.spotify.com/track/2vknxlulbj1JApedTlmrZv?si=ce0d42d1c70b4077"
@@ -107,9 +114,7 @@
             </a> -->
           </div>
           <p class="lead text-center">
-            This song holds a special place in my heart because of its powerful
-            lyrics and emotive melody. It speaks to me on a personal level and
-            has helped me through tough times.
+            {{$song->description}}
           </p>
         </div>
       </div>
@@ -117,14 +122,7 @@
         <div class="col-md-8 mx-auto">
           <h2 class="text-center">Lyrics</h2>
           <pre class="text-center">
-Verse 1:
-Lorem ipsum dolor sit amet,
-consectetur adipiscing elit.
-Nulla facilisi.
-
-Chorus:
-Sed do eiusmod tempor incididunt
-ut labore et dolore magna aliqua.
+{{$song->lyrics}}
             </pre
           >
         </div>

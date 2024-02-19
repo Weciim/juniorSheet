@@ -120,17 +120,17 @@
         <div class="ms-auto">
           <ul class="navbar-nav me-5 mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="./index.html"
+              <a class="nav-link active" aria-current="page" href=" {{ url('/song')}}"
                 >Discover</a
               >
             </li>
           </ul>
         </div>
-        <a class="navbar-brand" href="./index.html">SoundShare</a>
+        <a class="navbar-brand" href="{{url('/song')}}">SoundShare</a>
         <div class="me-auto">
           <ul class="navbar-nav ms-5 mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url('/song/create') }}">Share</a>
+              <a class="nav-link" href="{{ url('/song/take/create') }}">Share</a>
             </li>
           </ul>
         </div>
@@ -149,35 +149,8 @@
     </section>
     <section class="songs container py-5">
       <div class="row">
-        <div
-          class="col-12 col-md-6 col-lg-4 my-4 d-flex justify-content-center align-items-center"
-        >
-          <div class="card my-4 mx-2 youtube-background song-card">
-            <div class="card-body">
-              <a href="./song.blade.php">
-                <h5 class="card-title song-title song-title-youtube">
-                  Never Gonna Give You Up
-                </h5>
-              </a>
-              <h6 class="card-subtitle mb-2 text-muted">Rick Astley</h6>
-              <p class="card-text my-3 mb-4">
-                This song holds a special place in my heart because of its
-                powerful lyrics and emotive melody. It speaks to me on a
-                personal level and has helped me through tough times.
-              </p>
-              <a
-                href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                class="text-reset text-none"
-                target="_blank"
-              >
-                <div class="watch watch-youtube">
-                  <i class="fa-brands fa-youtube"></i>
-                  <span class="ms-2">Watch now on Youtube</span>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
+        @foreach ($songs as $song)
+            
         <div
           class="col-12 col-md-6 col-lg-4 my-4 d-flex justify-content-center align-items-center"
         >
@@ -185,29 +158,36 @@
             <div class="card-body">
               <a href="./song.html">
                 <h5 class="card-title song-title song-title-spotify">
-                  Allah Aleik Ya Seedy
-                </h5>
+{{                  $song->song_title
+}}                </h5>
               </a>
-              <h6 class="card-subtitle mb-2 text-muted">Ehab Tawfik</h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{$song->artist}}</h6>
               <p class="card-text my-3 mb-4">
-                I'm sharing this track because it's been my go-to jam whenever I
-                need a pick-me-up! The upbeat rhythm and catchy lyrics never
-                fail to put a smile on my face.
+              {{$song->description}}
               </p>
               <a
                 href="https://open.spotify.com/track/2vknxlulbj1JApedTlmrZv?si=ce0d42d1c70b4077"
                 class="text-reset text-none"
                 target="_blank"
               >
+              @if($song->platform == 'spotify')
                 <div class="watch watch-spotify">
                   <i class="fa-brands fa-spotify"></i>
-                  <span class="ms-2">Listen now on Spotify</span>
-                </div>
+                  <span class="ms-2">Listen now on {{$song->platform}}</span>
+                </div>  
+              @else
+                   <div class="watch watch-youtube">
+                  <i class="fa-brands fa-youtube"></i>
+                  <span class="ms-2">Listen now on {{$song->platform}}</span>
+                </div>   
+              @endif
               </a>
             </div>
           </div>
         </div>
+         @endforeach
       </div>
+     
     </section>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -216,3 +196,4 @@
     ></script>
   </body>
 </html>
+

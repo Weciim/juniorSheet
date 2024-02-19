@@ -24,17 +24,17 @@
         <div class="ms-auto">
           <ul class="navbar-nav me-5 mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="./home.blade.php"
+              <a class="nav-link active" aria-current="page" href=" {{ url('/song')}}"
                 >Discover</a
               >
             </li>
           </ul>
         </div>
-        <a class="navbar-brand" href="./home.blade.php">SoundShare</a>
+        <a class="navbar-brand" href="{{url('/song')}}">SoundShare</a>
         <div class="me-auto">
           <ul class="navbar-nav ms-5 mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="./create.blade.php">Share</a>
+              <a class="nav-link" href="{{ url('/song/take/create') }}">Share</a>
             </li>
           </ul>
         </div>

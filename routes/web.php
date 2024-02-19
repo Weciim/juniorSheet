@@ -14,6 +14,6 @@ use App\Http\Controllers\SongsController;
 */
 
 Route::get('/song','SongsController@home');
-Route::get('/song/{id}','SongsController@song');
-Route::get('/song/create','SongsController@create');
+Route::get('/song/{id}','SongsController@song')->name('song');
+Route::get('/song/take/create','SongsController@create');
 Route::post('/song/create/treat','SongsController@treat');
